@@ -93,7 +93,6 @@ client.on("delta", (delta) => {
       update.values.forEach((value) => {
         if (value.path === "navigation.attitude") {
           const attitude = value.value;
-          console.log("Attitude data:", attitude);
 
           // Process the attitude data
           processAttitude(attitude);

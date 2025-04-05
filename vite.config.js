@@ -8,9 +8,9 @@ export default defineConfig({
     open: true,
   },
   build: {
-    outDir: "dist",
+    outDir: "../dist",
     sourcemap: true,
-    assetsDir: "assets",
+    assetsDir: ".",
     emptyOutDir: true,
   },
   assetsInclude: ["**/*.svg"],

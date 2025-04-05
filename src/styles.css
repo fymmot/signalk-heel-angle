@@ -124,12 +124,22 @@ body {
   filter: url(#inner-shadow);
 }
 
+.pointer {
+  /* Remove default transition */
+  transition: none;
+}
+
+.pointer.ready {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .pointer ellipse {
   fill: var(--text-color);
 }
 
-.pointer {
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+/* Ensure pointer is visible immediately with correct color */
+[data-theme="dark"] .pointer ellipse {
+  fill: var(--text-color);
 }
 
 .tick-marks line {

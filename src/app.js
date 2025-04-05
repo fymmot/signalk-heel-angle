@@ -20,7 +20,21 @@ class HeelAngleInclinometer {
     this.coarsePath = this.coarseScale.querySelector(".scale-line");
 
     this.setupScales();
+    // Initialize pointers at 0° before setting up SignalK
+    this.initializePointers();
+
+    // Enable transitions after initial positioning
+    requestAnimationFrame(() => {
+      this.finePointer.classList.add("ready");
+      this.coarsePointer.classList.add("ready");
+    });
+
     this.setupSignalK();
+  }
+
+  initializePointers() {
+    // Place both pointers at the 0° position without animation
+    this.updateAngle(0, false);
   }
 
   setupHTML() {
@@ -39,7 +53,7 @@ class HeelAngleInclinometer {
             <g class="tick-marks"></g>
             <g class="scale-values"></g>
 
-            <!-- Pointer - moved up to y=75 -->
+            <!-- Pointer centered at 0° position -->
             <g class="pointer" transform="translate(200, 80)">
               <ellipse rx="7" ry="10" />
             </g>
@@ -265,7 +279,6 @@ class HeelAngleInclinometer {
             ) {
               // Convert radians to degrees
               const degrees = value.value.roll * (180 / Math.PI);
-              console.log("Heel angle update:", degrees.toFixed(1) + "°");
 
               // Update the display and animate the pointers
               this.updateAngle(degrees, false); // false means angle is already in degrees

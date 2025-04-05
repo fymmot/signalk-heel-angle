@@ -1,0 +1,65 @@
+{
+  "name": "signalk-wave-heave-sensor",
+  "version": "1.0.0",
+  "description": "SignalK plugin for estimating vessel heave and wave frequency using IMU data",
+  "main": "src/plugin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:local": "node src/test-local.js",
+    "build": "vite build"
+  },
+  "keywords": [
+    "signalk",
+    "signalk-plugin",
+    "signalk-category-charting",
+    "imu",
+    "waves",
+    "heave"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@signalk/client": "^2.3.0",
+    "@signalk/server-api": "^1.0.0",
+    "i2c-bus": "^5.2.0",
+    "mathjs": "^9.4.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/signalk-wave-heave-sensor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/signalk-wave-heave-sensor/issues"
+  },
+  "homepage": "https://github.com/yourusername/signalk-wave-heave-sensor#readme",
+  "signalk": {
+    "app": "signalk-wave-heave-sensor",
+    "id": "signalk-wave-heave-sensor",
+    "icon": "icon.png",
+    "displayName": "Wave Heave Sensor",
+    "description": "Estimates vessel heave and wave frequency using IMU data",
+    "license": "MIT",
+    "author": "Your Name",
+    "homepage": "https://github.com/yourusername/signalk-wave-heave-sensor#readme",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/yourusername/signalk-wave-heave-sensor.git"
+    },
+    "bugs": {
+      "url": "https://github.com/yourusername/signalk-wave-heave-sensor/issues"
+    },
+    "keywords": [
+      "signalk",
+      "signalk-plugin",
+      "signalk-category-charting",
+      "imu",
+      "waves",
+      "heave"
+    ],
+    "dependencies": {
+      "@signalk/server-api": "^1.0.0",
+      "i2c-bus": "^5.2.0",
+      "mathjs": "^9.4.4"
+    }
+  }
+}

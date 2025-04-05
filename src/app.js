@@ -43,13 +43,76 @@ class HeelAngleInclinometer {
         <div class="inclinometer">
           <!-- Fine scale (-5 to +5) -->
           <svg class="scale fine-scale" viewBox="0 0 400 120">
-            <!-- Glass tube background -->
-            <path class="tube-background" d="M 60,70 A 1200,1200 0 0,0 340,70 L 340,90 A 1200,1200 0 0,1 60,90 Z" />
+            <!-- Define gradients and filters -->
+            <defs>
+              <linearGradient id="tubeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:rgba(255,255,255,0.25);stop-opacity:1" />
+                <stop offset="45%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
+                <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:1" />
+              </linearGradient>
+              <linearGradient id="tubeGradientDark" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:rgba(255,255,255,0.12);stop-opacity:1" />
+                <stop offset="45%" style="stop-color:rgba(255,255,255,0.05);stop-opacity:1" />
+                <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:1" />
+              </linearGradient>
+              <filter id="tubeEffect">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur" />
+                <feSpecularLighting in="blur" surfaceScale="5" specularConstant=".9" 
+                                  specularExponent="35" lighting-color="#white" result="specular">
+                  <fePointLight x="200" y="-50" z="200" />
+                  <fePointLight x="200" y="150" z="100" />
+                </feSpecularLighting>
+                <feComposite in="specular" in2="SourceAlpha" operator="in" result="specular" />
+                <feComposite in="SourceGraphic" in2="specular" operator="arithmetic" 
+                            k1="0" k2="1" k3="1" k4="0" />
+              </filter>
+              <filter id="tubeEffectDark">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur" />
+                <feSpecularLighting in="blur" surfaceScale="4" specularConstant=".6" 
+                                  specularExponent="30" lighting-color="#white" result="specular">
+                  <fePointLight x="200" y="-50" z="150" />
+                  <fePointLight x="200" y="150" z="80" />
+                </feSpecularLighting>
+                <feComposite in="specular" in2="SourceAlpha" operator="in" result="specular" />
+                <feComposite in="SourceGraphic" in2="specular" operator="arithmetic" 
+                            k1="0" k2="1" k3="0.7" k4="0" />
+              </filter>
+            </defs>
+
+            <!-- Inner tick marks will be added by JavaScript -->
+            <g class="inner-tick-marks"></g>
             
+            <!-- Glass tube background with rounded ends -->
+            <path class="tube-background" d="
+              M 60,70 
+              A 1200,1200 0 0,0 340,70
+              A 10,10 0 0,1 340,90
+              A 1200,1200 0 0,1 60,90
+              A 10,10 0 0,1 60,70
+              Z" />
+            
+            <!-- Highlight overlay -->
+            <path class="tube-highlight" d="
+              M 60,71
+              A 1200,1200 0 0,0 340,71
+              A 8,8 0 0,1 340,77
+              A 1200,1200 0 0,1 60,77
+              A 8,8 0 0,1 60,71
+              Z" />
+            
+            <!-- Secondary highlight for cylindrical effect -->
+            <path class="tube-highlight-secondary" d="
+              M 60,83
+              A 1200,1200 0 0,0 340,83
+              A 8,8 0 0,1 340,86
+              A 1200,1200 0 0,1 60,86
+              A 8,8 0 0,1 60,83
+              Z" />
+
             <!-- Scale line (bottom of tube) -->
             <path class="scale-line" d="M 60,90 A 1200,1200 0 0,0 340,90" />
 
-            <!-- Tick marks and numbers will be added by JavaScript -->
+            <!-- Outer tick marks and numbers will be added by JavaScript -->
             <g class="tick-marks"></g>
             <g class="scale-values"></g>
 
@@ -73,17 +136,80 @@ class HeelAngleInclinometer {
 
           <!-- Coarse scale (-30 to +30) -->
           <svg class="scale coarse-scale" viewBox="0 0 400 160">
-            <!-- Glass tube background -->
-            <path class="tube-background" d="M 40,90 A 400,400 0 0,0 360,90 L 360,110 A 400,400 0 0,1 40,110 Z" />
+            <!-- Define gradients and filters -->
+            <defs>
+              <linearGradient id="tubeGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:rgba(255,255,255,0.25);stop-opacity:1" />
+                <stop offset="45%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
+                <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:1" />
+              </linearGradient>
+              <linearGradient id="tubeGradient2Dark" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:rgba(255,255,255,0.12);stop-opacity:1" />
+                <stop offset="45%" style="stop-color:rgba(255,255,255,0.05);stop-opacity:1" />
+                <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:1" />
+              </linearGradient>
+              <filter id="tubeEffect2">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur" />
+                <feSpecularLighting in="blur" surfaceScale="5" specularConstant=".9" 
+                                  specularExponent="35" lighting-color="#white" result="specular">
+                  <fePointLight x="200" y="-50" z="200" />
+                  <fePointLight x="200" y="150" z="100" />
+                </feSpecularLighting>
+                <feComposite in="specular" in2="SourceAlpha" operator="in" result="specular" />
+                <feComposite in="SourceGraphic" in2="specular" operator="arithmetic" 
+                            k1="0" k2="1" k3="1" k4="0" />
+              </filter>
+              <filter id="tubeEffect2Dark">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur" />
+                <feSpecularLighting in="blur" surfaceScale="4" specularConstant=".6" 
+                                  specularExponent="30" lighting-color="#white" result="specular">
+                  <fePointLight x="200" y="-50" z="150" />
+                  <fePointLight x="200" y="150" z="80" />
+                </feSpecularLighting>
+                <feComposite in="specular" in2="SourceAlpha" operator="in" result="specular" />
+                <feComposite in="SourceGraphic" in2="specular" operator="arithmetic" 
+                            k1="0" k2="1" k3="0.7" k4="0" />
+              </filter>
+            </defs>
+
+            <!-- Inner tick marks will be added by JavaScript -->
+            <g class="inner-tick-marks"></g>
             
+            <!-- Glass tube background with rounded ends -->
+            <path class="tube-background" d="
+              M 40,90 
+              A 400,400 0 0,0 360,90
+              A 10,10 0 0,1 360,110
+              A 400,400 0 0,1 40,110
+              A 10,10 0 0,1 40,90
+              Z" />
+            
+            <!-- Highlight overlay -->
+            <path class="tube-highlight" d="
+              M 40,92
+              A 400,400 0 0,0 360,92
+              A 8,8 0 0,1 360,96
+              A 400,400 0 0,1 40,96
+              A 8,8 0 0,1 40,92
+              Z" />
+
+            <!-- Secondary highlight for cylindrical effect -->
+            <path class="tube-highlight-secondary" d="
+              M 40,103
+              A 400,400 0 0,0 360,103
+              A 8,8 0 0,1 360,106
+              A 400,400 0 0,1 40,106
+              A 8,8 0 0,1 40,103
+              Z" />
+
             <!-- Scale line (bottom of tube) -->
             <path class="scale-line" d="M 40,110 A 400,400 0 0,0 360,110" />
 
-            <!-- Tick marks and numbers will be added by JavaScript -->
+            <!-- Outer tick marks and numbers will be added by JavaScript -->
             <g class="tick-marks"></g>
             <g class="scale-values"></g>
 
-            <!-- Pointer - moved up to y=95 -->
+            <!-- Pointer centered at 0° position -->
             <g class="pointer" transform="translate(200, 100)">
               <ellipse rx="7" ry="10" />
             </g>
@@ -104,12 +230,14 @@ class HeelAngleInclinometer {
 
   setupScale(scale, min, max, majorStep, minorStep) {
     const tickMarksGroup = scale.querySelector(".tick-marks");
+    const innerTickMarksGroup = scale.querySelector(".inner-tick-marks");
     const valuesGroup = scale.querySelector(".scale-values");
     const path = scale.querySelector(".scale-line");
     const pathLength = path.getTotalLength();
 
     // Clear existing elements
     tickMarksGroup.innerHTML = "";
+    innerTickMarksGroup.innerHTML = "";
     valuesGroup.innerHTML = "";
 
     // Calculate positions for all ticks and numbers
@@ -121,7 +249,7 @@ class HeelAngleInclinometer {
       const point = path.getPointAtLength(distance);
       const angle = this.getAngleAtPoint(path, point, pathLength);
 
-      // Create tick mark
+      // Create outer tick mark
       const tick = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "line"
@@ -136,9 +264,33 @@ class HeelAngleInclinometer {
       tick.setAttribute("y1", tickStart.y);
       tick.setAttribute("x2", tickEnd.x);
       tick.setAttribute("y2", tickEnd.y);
-      tick.setAttribute("stroke", "black");
+      tick.setAttribute("stroke", "var(--text-color)");
       tick.setAttribute("stroke-width", isMajor ? 1.5 : 1);
       tickMarksGroup.appendChild(tick);
+
+      // Create inner tick mark (shorter and more subtle)
+      const innerTick = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "line"
+      );
+      const innerTickLength = isMajor ? 6 : 3; // Slightly shorter than outer ticks
+
+      // Position inner tick mark upward from the line
+      const innerTickStart = this.getPointFromAngle(point, angle - 90, 0);
+      const innerTickEnd = this.getPointFromAngle(
+        point,
+        angle - 90,
+        innerTickLength
+      );
+
+      innerTick.setAttribute("x1", innerTickStart.x);
+      innerTick.setAttribute("y1", innerTickStart.y);
+      innerTick.setAttribute("x2", innerTickEnd.x);
+      innerTick.setAttribute("y2", innerTickEnd.y);
+      innerTick.setAttribute("stroke", "var(--text-color)");
+      innerTick.setAttribute("stroke-width", isMajor ? 1.2 : 0.8);
+      innerTick.setAttribute("opacity", "0.6"); // Increased from 0.4 to make inner ticks more visible
+      innerTickMarksGroup.appendChild(innerTick);
 
       // Add number for major ticks
       if (isMajor) {
@@ -156,7 +308,7 @@ class HeelAngleInclinometer {
         text.setAttribute("x", numberPoint.x);
         text.setAttribute("y", numberPoint.y);
         text.setAttribute("text-anchor", "middle");
-        text.setAttribute("dominant-baseline", "hanging"); // Changed to align text below the point
+        text.setAttribute("dominant-baseline", "hanging");
         text.setAttribute("font-size", value === 0 ? "14" : "12");
         text.setAttribute("font-family", "Arial, sans-serif");
         text.textContent = Math.abs(value) + (value === 0 ? "°" : "");

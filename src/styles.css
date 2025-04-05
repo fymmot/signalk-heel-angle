@@ -5,6 +5,9 @@
   --text-color: black;
   --tube-bg: #f0f0f0;
   --shadow-color: rgba(0, 0, 0, 0.1);
+  --tube-filter: url(#tubeEffect);
+  --tube-gradient: url(#tubeGradient);
+  --tube2-gradient: url(#tubeGradient2);
 }
 
 [data-theme="dark"] {
@@ -14,6 +17,9 @@
   --text-color: white;
   --tube-bg: #3d3d3d;
   --shadow-color: rgba(0, 0, 0, 0.3);
+  --tube-filter: url(#tubeEffectDark);
+  --tube-gradient: url(#tubeGradientDark);
+  --tube2-gradient: url(#tubeGradient2Dark);
 }
 
 body {
@@ -87,6 +93,7 @@ body {
 .scale {
   margin: 0;
   display: block;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
 }
 
 .fine-scale {
@@ -116,12 +123,81 @@ body {
 .tube-background {
   fill: var(--tube-bg);
   stroke: none;
-  opacity: 0.8;
+  opacity: 0.6;
+  filter: var(--tube-filter);
+  transition: fill 0.3s ease, filter 0.3s ease;
 }
 
-/* Add subtle inner shadow to tubes */
+/* Add glass tube effect */
+.scale {
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+}
+
+/* Inner tick marks styling */
+.inner-tick-marks line {
+  stroke: var(--text-color);
+  opacity: 0.6;
+  transition: stroke 0.3s ease;
+}
+
+/* Glass highlight effects */
+.tube-highlight {
+  fill: var(--tube-gradient);
+  opacity: 0.3;
+  mix-blend-mode: soft-light;
+  transition: fill 0.3s ease, opacity 0.3s ease;
+}
+
+.tube-highlight-secondary {
+  fill: var(--tube-gradient);
+  opacity: 0.2;
+  mix-blend-mode: overlay;
+  transition: fill 0.3s ease, opacity 0.3s ease;
+}
+
+.coarse-scale .tube-highlight {
+  fill: var(--tube2-gradient);
+}
+
+.coarse-scale .tube-highlight-secondary {
+  fill: var(--tube2-gradient);
+}
+
+/* Enhanced glass effect for dark mode */
+[data-theme="dark"] .tube-highlight {
+  opacity: 0.15;
+  mix-blend-mode: soft-light;
+}
+
+[data-theme="dark"] .tube-highlight-secondary {
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+}
+
+[data-theme="dark"] .inner-tick-marks line {
+  opacity: 0.5;
+}
+
+/* Ensure proper layering */
+.inner-tick-marks {
+  z-index: 1;
+}
+
 .tube-background {
-  filter: url(#inner-shadow);
+  z-index: 2;
+}
+
+.tube-highlight {
+  z-index: 3;
+}
+
+.tube-highlight-secondary {
+  z-index: 4;
+}
+
+.tick-marks,
+.scale-values {
+  z-index: 5;
 }
 
 .pointer {
@@ -135,6 +211,7 @@ body {
 
 .pointer ellipse {
   fill: var(--text-color);
+  transition: fill 0.3s ease;
 }
 
 /* Ensure pointer is visible immediately with correct color */
@@ -150,7 +227,7 @@ body {
 .scale-values text {
   fill: var(--text-color);
   font-family: Arial, sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 800;
 }
 

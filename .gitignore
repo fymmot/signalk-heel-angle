@@ -17,6 +17,7 @@ Thumbs.db
 # Build
 dist/
 build/
+public/
 *.log
 
 # Environment

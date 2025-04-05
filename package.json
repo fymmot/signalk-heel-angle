@@ -1,15 +1,16 @@
 {
   "name": "signalk-heel-angle",
   "version": "1.0.0",
-  "description": "An analog-style heel angle inclinometer for SignalK",
+  "description": "A simple analog-style heel angle inclinometer for SignalK",
   "type": "module",
+  "main": "public/index.html",
   "scripts": {
     "build": "npx vite build",
     "dev": "vite",
     "prepublishOnly": "npm run build"
   },
   "files": [
-    "dist",
+    "public",
     "icon.svg"
   ],
   "keywords": [
@@ -37,8 +38,8 @@
   "signalk": {
     "appType": "webapp",
     "name": "Heel Angle Inclinometer",
-    "description": "A beautiful heel angle inclinometer webapp",
-    "icon": "icon.svg",
+    "description": "A simple analog-style heel angle inclinometer for SignalK",
+    "icon": "icon.png",
     "keywords": [
       "signalk-webapp",
       "signalk-category-instruments",

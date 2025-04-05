@@ -1,5 +1,9 @@
 import { Client } from "@signalk/client";
 import "./styles.css";
+import { initTheme } from "./theme.js";
+
+// Initialize theme before creating the inclinometer
+initTheme();
 
 class HeelAngleInclinometer {
   constructor(containerId) {
@@ -201,8 +205,11 @@ class HeelAngleInclinometer {
   setupSignalK() {
     // Get SignalK server configuration from URL parameters or use defaults
     const urlParams = new URLSearchParams(window.location.search);
-    const signalkHost =
-      urlParams.get("signalkHost") || window.location.hostname;
+    const isDev = import.meta.env.DEV;
+
+    // Default to localhost in production, openplotter.local in development
+    const defaultHost = isDev ? "openplotter.local" : window.location.hostname;
+    const signalkHost = urlParams.get("signalkHost") || defaultHost;
     const signalkPort = urlParams.get("signalkPort") || "3000";
     const signalkUseTLS = urlParams.get("signalkUseTLS") === "true";
 

@@ -1,76 +1,71 @@
-# SignalK Wave Heave Sensor Plugin
+# SignalK Heel Angle Inclinometer
 
-This SignalK plugin estimates vessel heave (vertical displacement) and wave frequency using IMU data. It is based on the algorithms from the [BBN Boat Heave Sensor](https://github.com/bareboat-necessities/bbn-wave-period-esp32) project, adapted for use with SignalK and OpenPlotter.
+A digital recreation of a classic analog heel angle inclinometer, featuring both fine (-5° to +5°) and coarse (-30° to +30°) scales. 
+
+![Heel Angle Inclinometer Screenshot](screenshot.png)
 
 ## Features
 
-- Estimates vessel heave using IMU data
-- Calculates wave frequency using the Aranovskiy filter
-- Provides alternative heave estimation using a trochoidal wave model
-- Publishes data to SignalK in standard format
-- Compatible with OpenPlotter and other SignalK applications
-
-## Hardware Requirements
-
-- Raspberry Pi (any model with I2C support)
-- MPU6050 or compatible IMU sensor connected via I2C
-- I2C connection:
-  - VCC to 3.3V
-  - GND to GND
-  - SCL to GPIO3 (Pin 5)
-  - SDA to GPIO2 (Pin 3)
+- Analog-inspired design with a glass effect
+- Dual scale display:
+  - Fine scale (-5° to +5°) for precise readings near level
+  - Coarse scale (-30° to +30°) for larger heel angles
+- Dark mode support (click the text to toggle)
+- Can be embedded in Kip dashboard
 
 ## Installation
 
-1. Install the plugin in OpenPlotter:
-   - Open OpenPlotter
-   - Go to SignalK > Plugin Manager
-   - Click "Add Plugin"
-   - Enter the plugin URL: `https://github.com/yourusername/signalk-wave-heave-sensor`
-   - Click "Install"
+This webapp can be installed directly from the SignalK App Store in your SignalK server's admin interface.
 
-2. Enable I2C on your Raspberry Pi:
-   - Open OpenPlotter
-   - Go to System > I2C
-   - Enable I2C
-   - Reboot if prompted
+### Manual Installation
 
-3. Connect the IMU sensor:
-   - Follow the hardware connection instructions above
-   - Verify the I2C address (default is 0x68)
+1. Download or clone this repository
+2. Run `npm install` to install dependencies
+3. Run `npm run build` to create the production build
+4. Copy the contents of the `dist` directory to your SignalK webapp directory
 
-## Configuration
+## Usage
 
-The plugin can be configured through the SignalK plugin settings:
+1. Access your SignalK server's web interface
+2. Navigate to Webapps
+3. Click on "Heel Angle Inclinometer"
+4. The webapp will automatically connect to your SignalK server and display real-time heel angle data
 
-- **IMU I2C Address**: The I2C address of your IMU sensor (default: 0x68)
-- **Sample Rate**: The sampling rate in Hz (default: 250)
+### Embedding in Kip Dashboard
 
-## SignalK Data Paths
+The web app can be embedded as a webpage widget in your Kip dashboard:
 
-The plugin publishes the following data paths:
+1. In Kip, add a new "Webpage" widget to your dashboard
+2. Enter the URL where your inclinometer is running:
+   ```
+   http://your-signalk-server/signalk-heel-angle/index.html
+   ```
 
-- `environment.waves.height`: Estimated vessel heave in meters
-- `environment.waves.heightAlternate`: Alternative heave estimation using trochoidal wave model
-- `environment.waves.frequency`: Estimated wave frequency in Hz
+### Configuration
 
-## Algorithm Details
+The webapp supports the following URL parameters for custom configuration:
 
-The plugin uses several algorithms to estimate heave and wave frequency:
+- `signalkHost`: Custom SignalK server hostname (default: current hostname)
+- `signalkPort`: Custom SignalK server port (default: 3000)
+- `signalkUseTLS`: Use TLS for connection (default: false)
 
-1. **Attitude Estimation**: A complementary filter combines accelerometer and gyroscope data to estimate vessel attitude.
+Example:
+```
+http://your-signalk-server/heel-angle/?signalkHost=openplotter.local&signalkPort=3000
+```
 
-2. **Heave Estimation**: Two Kalman filters estimate heave:
-   - Basic model: Estimates heave using vertical acceleration
-   - Trochoidal model: Uses wave frequency to improve heave estimation
+## Development
 
-3. **Frequency Estimation**: The Aranovskiy filter estimates wave frequency from vertical acceleration.
-
-## Troubleshooting
-
-- **No data**: Check I2C connections and address
-- **Incorrect readings**: Calibrate IMU or adjust filter parameters
-- **High CPU usage**: Reduce sample rate in plugin settings
+1. Clone this repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start development server:
+   ```bash
+   npm run dev
+   ```
+4. Open http://localhost:5173 in your browser
 
 ## Contributing
 
@@ -78,10 +73,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- Based on algorithms from [BBN Boat Heave Sensor](https://github.com/bareboat-necessities/bbn-wave-period-esp32)
-- Uses SignalK plugin framework
-- Compatible with OpenPlotter 
+- Inspired by the classic Silva marine inclinometer design

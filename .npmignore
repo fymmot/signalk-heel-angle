@@ -1,0 +1,21 @@
+# Source files
+src/
+
+# Development config
+.gitignore
+vite.config.js
+deploy.sh
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Development files
+node_modules/
+*.log 

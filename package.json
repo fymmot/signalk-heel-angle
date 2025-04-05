@@ -1,67 +1,53 @@
 {
-  "name": "signalk-wave-heave-sensor",
+  "name": "signalk-heel-angle",
   "version": "1.0.0",
-  "description": "SignalK plugin for estimating vessel heave and wave frequency using IMU data",
-  "main": "src/plugin/index.js",
+  "description": "An analog-style heel angle inclinometer for SignalK",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:local": "node src/test-local.js",
     "build": "npx vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": [
-    "signalk",
-    "signalk-plugin",
-    "signalk-category-charting",
-    "imu",
-    "waves",
-    "heave"
+  "files": [
+    "dist",
+    "icon.svg"
   ],
-  "author": "Your Name",
+  "keywords": [
+    "signalk-webapp",
+    "signalk",
+    "signalk-category-instruments",
+    "heel-angle",
+    "inclinometer",
+    "sailing",
+    "navigation"
+  ],
+  "author": "Tommy Feldt",
   "license": "MIT",
   "dependencies": {
-    "@signalk/client": "^2.3.0",
-    "@signalk/server-api": "^1.0.0",
-    "i2c-bus": "^5.2.0",
-    "mathjs": "^9.4.4"
+    "@signalk/client": "^2.3.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/signalk-wave-heave-sensor.git"
+    "url": "git+https://github.com/tfeldt/signalk-heel-angle.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/signalk-wave-heave-sensor/issues"
+    "url": "https://github.com/tfeldt/signalk-heel-angle/issues"
   },
-  "homepage": "https://github.com/yourusername/signalk-wave-heave-sensor#readme",
+  "homepage": "https://github.com/tfeldt/signalk-heel-angle#readme",
   "signalk": {
-    "app": "signalk-wave-heave-sensor",
-    "id": "signalk-wave-heave-sensor",
-    "icon": "icon.png",
-    "displayName": "Wave Heave Sensor",
-    "description": "Estimates vessel heave and wave frequency using IMU data",
-    "license": "MIT",
-    "author": "Your Name",
-    "homepage": "https://github.com/yourusername/signalk-wave-heave-sensor#readme",
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/yourusername/signalk-wave-heave-sensor.git"
-    },
-    "bugs": {
-      "url": "https://github.com/yourusername/signalk-wave-heave-sensor/issues"
-    },
+    "appType": "webapp",
+    "name": "Heel Angle Inclinometer",
+    "description": "A beautiful heel angle inclinometer webapp",
+    "icon": "icon.svg",
     "keywords": [
-      "signalk",
-      "signalk-plugin",
-      "signalk-category-charting",
-      "imu",
-      "waves",
-      "heave"
+      "signalk-webapp",
+      "signalk-category-instruments",
+      "heel-angle",
+      "inclinometer",
+      "sailing",
+      "navigation"
     ],
-    "dependencies": {
-      "@signalk/server-api": "^1.0.0",
-      "i2c-bus": "^5.2.0",
-      "mathjs": "^9.4.4"
-    }
+    "version": "1.0.0"
   },
   "devDependencies": {
     "vite": "^6.2.5"

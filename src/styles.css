@@ -63,12 +63,12 @@ body {
   color: var(--text-color);
 }
 
-.silva-logo {
-  font-family: Arial Black, Arial, sans-serif;
+.heel-angle-text {
+  font-family: Impact, Arial Black, Arial, sans-serif;
   font-weight: 900;
-  font-size: 24px;
+  font-size: 22px;
   letter-spacing: 2px;
-  margin: 15px 0;
+  margin: 8px 0;
   text-align: center;
   width: 100%;
   position: absolute;
@@ -81,7 +81,7 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.silva-logo:hover {
+.heel-angle-text:hover {
   opacity: 0.8;
 }
 
@@ -227,7 +227,7 @@ body {
 .scale-values text {
   fill: var(--text-color);
   font-family: Arial, sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 800;
 }
 

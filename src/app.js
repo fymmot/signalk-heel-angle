@@ -85,32 +85,32 @@ class HeelAngleInclinometer {
             <!-- Glass tube background with rounded ends -->
             <path class="tube-background" d="
               M 60,70 
-              A 1200,1200 0 0,0 340,70
+              A 2400,2400 0 0,0 340,70
               A 10,10 0 0,1 340,90
-              A 1200,1200 0 0,1 60,90
+              A 2400,2400 0 0,1 60,90
               A 10,10 0 0,1 60,70
               Z" />
             
             <!-- Highlight overlay -->
             <path class="tube-highlight" d="
               M 60,71
-              A 1200,1200 0 0,0 340,71
+              A 2400,2400 0 0,0 340,71
               A 8,8 0 0,1 340,77
-              A 1200,1200 0 0,1 60,77
+              A 2400,2400 0 0,1 60,77
               A 8,8 0 0,1 60,71
               Z" />
             
             <!-- Secondary highlight for cylindrical effect -->
             <path class="tube-highlight-secondary" d="
               M 60,83
-              A 1200,1200 0 0,0 340,83
+              A 2400,2400 0 0,0 340,83
               A 8,8 0 0,1 340,86
-              A 1200,1200 0 0,1 60,86
+              A 2400,2400 0 0,1 60,86
               A 8,8 0 0,1 60,83
               Z" />
 
             <!-- Scale line (bottom of tube) -->
-            <path class="scale-line" d="M 60,90 A 1200,1200 0 0,0 340,90" />
+            <path class="scale-line" d="M 60,90 A 2400,2400 0 0,0 340,90" />
 
             <!-- Outer tick marks and numbers will be added by JavaScript -->
             <g class="tick-marks"></g>
@@ -122,16 +122,8 @@ class HeelAngleInclinometer {
             </g>
           </svg>
 
-          <div class="brand silva-logo">
-            <svg version="1.1" id="layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-              viewBox="0 0 652 652" style="width: 100px; height: auto;" xml:space="preserve">
-              <path d="M405.3,353.5v32.9H286.6c-5.1,0-9.3-4.2-9.3-9.3c0,0,0,0,0,0V255.7h49.9l0,88.5c0,5.1,4.2,9.3,9.3,9.3L405.3,353.5
-                M621.8,386.4l-60.2-130.7l-58.1,0l-37.7,81.8l-37.6-81.8h-50.1l60.3,130.7h54.9l39.3-85.4l24.2,52.6h-24.2v32.8L621.8,386.4
-                L621.8,386.4z M21.8,386.5l0-32.7h78.8c5.1,0,9.3-4.4,9.3-9.5c0-5.2-4.2-9.3-9.3-9.3l0,0l-39.2,0c-21.9,0-39.6-17.7-39.6-39.6
-                c0-21.9,17.7-39.6,39.6-39.6l173.8,0c5.1,0,9.3,4.2,9.3,9.3v121.4h-49.9l0-88.5c0-5.1-4.2-9.3-9.3-9.3l-104.4,0
-                c-5.2,0-9.3,4.2-9.3,9.3c0,0,0,0,0,0c0,5.1,4.2,9.3,9.3,9.3l39.4,0c21.9,0,39.6,17.8,39.6,39.6c0,21.9-17.5,39.7-39.4,39.7
-                L21.8,386.5"/>
-            </svg>
+          <div class="brand heel-angle-text">
+            HEEL
           </div>
 
           <!-- Coarse scale (-30 to +30) -->

@@ -39,12 +39,12 @@ The web app can be embedded as a webpage widget in your Kip dashboard:
 1. In Kip, add a new "Webpage" widget to your dashboard
 2. Enter the URL where your inclinometer is running:
    ```
-   http://your-signalk-server/signalk-heel-angle/index.html
+   http://your-signalk-server/signalk-heel-angle/
    ```
 
 ### Configuration
 
-The webapp supports the following URL parameters for custom configuration:
+The webapp allows for configuration of the SignalK connection via URL parameters:
 
 - `signalkHost`: Custom SignalK server hostname (default: current hostname)
 - `signalkPort`: Custom SignalK server port (default: 3000)
@@ -62,11 +62,17 @@ http://your-signalk-server/heel-angle/?signalkHost=openplotter.local&signalkPort
    ```bash
    npm install
    ```
-3. Start development server:
+3. Modify the `.env` file with your SignalK server details:
+   ```
+   VITE_SIGNALK_HOST=your-signalk-server
+   VITE_SIGNALK_PORT=3000
+   VITE_SIGNALK_USE_TLS=false
+   ```
+4. Start development server:
    ```bash
    npm run dev
    ```
-4. Open http://localhost:5173 in your browser
+5. Open http://localhost:5173 in your browser
 
 ## Contributing
 

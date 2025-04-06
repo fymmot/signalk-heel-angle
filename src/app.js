@@ -365,11 +365,26 @@ class HeelAngleInclinometer {
     const urlParams = new URLSearchParams(window.location.search);
     const isDev = import.meta.env.DEV;
 
-    // Default to localhost in production, openplotter.local in development
-    const defaultHost = isDev ? "openplotter.local" : window.location.hostname;
+    // Debug logging
+    console.log("Environment variables:", {
+      VITE_SIGNALK_HOST: import.meta.env.VITE_SIGNALK_HOST,
+      VITE_SIGNALK_PORT: import.meta.env.VITE_SIGNALK_PORT,
+      VITE_SIGNALK_USE_TLS: import.meta.env.VITE_SIGNALK_USE_TLS,
+      isDev: isDev,
+    });
+
+    // For local development, use environment variables if available
+    // For production, use URL parameters or defaults
+    const defaultHost = isDev
+      ? import.meta.env.VITE_SIGNALK_HOST || "openplotter.local"
+      : window.location.hostname;
     const signalkHost = urlParams.get("signalkHost") || defaultHost;
-    const signalkPort = urlParams.get("signalkPort") || "3000";
-    const signalkUseTLS = urlParams.get("signalkUseTLS") === "true";
+    const signalkPort =
+      urlParams.get("signalkPort") ||
+      (isDev ? import.meta.env.VITE_SIGNALK_PORT || "3000" : "3000");
+    const signalkUseTLS =
+      urlParams.get("signalkUseTLS") === "true" ||
+      (isDev ? import.meta.env.VITE_SIGNALK_USE_TLS === "true" : false);
 
     console.log(
       `Connecting to SignalK server at ${signalkHost}:${signalkPort} (TLS: ${signalkUseTLS})`
@@ -386,6 +401,7 @@ class HeelAngleInclinometer {
 
     client.on("connect", () => {
       console.log("Connected to Signal K server");
+      this.updateConnectionStatus(true);
 
       // Subscribe using the correct format
       client.subscribe({
@@ -480,6 +496,77 @@ class HeelAngleInclinometer {
       "transform",
       `translate(${point.x}, ${point.y + verticalOffset}) rotate(${angle})`
     );
+  }
+
+  // Add configuration UI to the page
+  addConfigUI(host, port, useTLS) {
+    // Create config button
+    const configButton = document.createElement("button");
+    configButton.className = "config-button";
+    configButton.innerHTML = "⚙️";
+    configButton.title = "Configure SignalK Connection";
+    document.body.appendChild(configButton);
+
+    // Create config panel
+    const configPanel = document.createElement("div");
+    configPanel.className = "config-panel";
+    configPanel.innerHTML = `
+      <h3>SignalK Configuration</h3>
+      <div class="config-form">
+        <div class="form-group">
+          <label for="signalkHost">Server Host:</label>
+          <input type="text" id="signalkHost" value="${host}">
+        </div>
+        <div class="form-group">
+          <label for="signalkPort">Port:</label>
+          <input type="text" id="signalkPort" value="${port}">
+        </div>
+        <div class="form-group">
+          <label for="signalkUseTLS">Use TLS:</label>
+          <input type="checkbox" id="signalkUseTLS" ${useTLS ? "checked" : ""}>
+        </div>
+        <div class="form-group">
+          <button id="saveConfig">Save & Reconnect</button>
+          <button id="closeConfig">Cancel</button>
+        </div>
+      </div>
+      <div class="connection-status">
+        <span id="connectionStatus">Connecting...</span>
+      </div>
+    `;
+    document.body.appendChild(configPanel);
+
+    // Add event listeners
+    configButton.addEventListener("click", () => {
+      configPanel.classList.toggle("visible");
+    });
+
+    document.getElementById("closeConfig").addEventListener("click", () => {
+      configPanel.classList.remove("visible");
+    });
+
+    document.getElementById("saveConfig").addEventListener("click", () => {
+      const newHost = document.getElementById("signalkHost").value;
+      const newPort = document.getElementById("signalkPort").value;
+      const newUseTLS = document.getElementById("signalkUseTLS").checked;
+
+      // Save to localStorage
+      localStorage.setItem("signalkHost", newHost);
+      localStorage.setItem("signalkPort", newPort);
+      localStorage.setItem("signalkUseTLS", newUseTLS);
+
+      // Reload the page to apply new settings
+      window.location.reload();
+    });
+  }
+
+  // Update connection status in the UI
+  updateConnectionStatus(connected) {
+    const statusElement = document.getElementById("connectionStatus");
+    if (statusElement) {
+      statusElement.textContent = connected ? "Connected" : "Disconnected";
+      statusElement.className = connected ? "connected" : "disconnected";
+    }
   }
 }
 

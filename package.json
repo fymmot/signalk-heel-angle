@@ -29,15 +29,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tfeldt/signalk-heel-angle.git"
+    "url": "git+https://github.com/fymmot/signalk-heel-angle.git"
   },
   "bugs": {
-    "url": "https://github.com/tfeldt/signalk-heel-angle/issues"
+    "url": "https://github.com/fymmot/signalk-heel-angle/issues"
   },
-  "homepage": "https://github.com/tfeldt/signalk-heel-angle#readme",
+  "homepage": "https://github.com/fymmot/signalk-heel-angle#readme",
   "signalk": {
     "appType": "webapp",
     "name": "Heel Angle Inclinometer",
+    "displayName": "Analog Heel Angle Inclinometer",
     "description": "A simple analog-style heel angle inclinometer for SignalK",
     "icon": "icon.svg",
     "keywords": [

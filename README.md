@@ -1,6 +1,6 @@
 # SignalK Heel Angle Inclinometer
 
-A simple digital recreation of a classic analog heel angle inclinometer, featuring both fine (-5° to +5°) and coarse (-30° to +30°) scales. 
+A simple digital recreation of a classic analog heel angle inclinometer, featuring both fine (-5° to +5°) and coarse (-35° to +35°) scales. 
 
 ![Heel Angle Inclinometer Screenshot](screenshot.png)
 
@@ -10,7 +10,7 @@ A simple digital recreation of a classic analog heel angle inclinometer, featuri
 - Analog-inspired design with a glass effect
 - Dual scale display:
   - Fine scale (-5° to +5°) for precise readings near level
-  - Coarse scale (-30° to +30°) for larger heel angles
+  - Coarse scale (-35° to +35°) for larger heel angles
 - Dark mode support (click the text to toggle)
 - Can be embedded in Kip dashboard or viewed standalone
 

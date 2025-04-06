@@ -217,7 +217,7 @@ class HeelAngleInclinometer {
 
   setupScales() {
     this.setupScale(this.fineScale, -5, 5, 1, 0.5); // Major ticks every 1°, minor ticks every 0.5°
-    this.setupScale(this.coarseScale, -30, 30, 10, 5); // Major ticks every 10°, minor ticks every 5°
+    this.setupScale(this.coarseScale, -35, 35, 10, 5); // Major ticks every 10°, minor ticks every 5°
   }
 
   setupScale(scale, min, max, majorStep, minorStep) {
@@ -447,8 +447,8 @@ class HeelAngleInclinometer {
       this.coarsePath,
       this.coarsePointer,
       degrees,
-      -30,
-      30
+      -35,
+      35
     );
 
     // Update digital display

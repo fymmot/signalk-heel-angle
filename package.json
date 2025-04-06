@@ -39,7 +39,7 @@
     "appType": "webapp",
     "name": "Heel Angle Inclinometer",
     "description": "A simple analog-style heel angle inclinometer for SignalK",
-    "icon": "icon.png",
+    "icon": "icon.svg",
     "keywords": [
       "signalk-webapp",
       "signalk-category-instruments",
